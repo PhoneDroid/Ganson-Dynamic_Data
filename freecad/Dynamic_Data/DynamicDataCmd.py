@@ -32,6 +32,8 @@ mostRecentTypes=[]
 mostRecentTypesLength = 5 #will be updated from parameters
 
 
+from .Misc import asIcon
+
 from FreeCAD import Gui
 from PySide import QtCore, QtGui
 
@@ -303,7 +305,7 @@ class DynamicDataSettingsCommandClass(DynamicDataBaseCommandClass):
             self.setAttribute(QtCore.Qt.WA_WindowPropagation, True)
             self.form = Gui.PySideUic.loadUi(uiPath + "/dynamicdataprefs.ui")
             self.setWindowTitle(self.form.windowTitle()+" v."+__version__)
-            self.setWindowIcon(QtGui.QIcon("Resources/icons/Settings.svg"))
+            self.setWindowIcon(QtGui.QIcon(asIcon('Settings')))
             lay = QtGui.QVBoxLayout(self)
             lay.addWidget(self.form)
             self.setLayout(lay)
@@ -329,7 +331,7 @@ class DynamicDataSettingsCommandClass(DynamicDataBaseCommandClass):
         pass
 
     def GetResources(self):
-        return {'Pixmap'  : os.path.join( iconPath , 'Settings.svg'), # the name of an icon file available in the resources
+        return {'Pixmap'  : asIcon('Settings'), # the name of an icon file available in the resources
                 'MenuText': "&Settings",
                 'Accel'   : "Ctrl+Shift+D,S",
                 'ToolTip' : "Workbench settings dialog"}
@@ -352,7 +354,7 @@ class DynamicDataCreateObjectCommandClass(DynamicDataBaseCommandClass):
     """Create Object command"""
 
     def GetResources(self):
-        return {'Pixmap'  : os.path.join( iconPath , 'CreateObject.svg'),
+        return {'Pixmap'  : asIcon('CreateObject'),
                 'MenuText': "&Create Object",
                 'Accel'   : "Ctrl+Shift+D,C",
                 'ToolTip' : "Create the DynamicData object to contain the custom properties"}
@@ -401,7 +403,7 @@ class DynamicDataCreateConfigurationCommandClass(DynamicDataBaseCommandClass):
             self.setAttribute(QtCore.Qt.WA_WindowPropagation, True)
             self.setAttribute(QtCore.Qt.WA_DeleteOnClose, True)
             self.setWindowTitle(f"DynamicData v{__version__} Configuration Editor")
-            self.setWindowIcon(QtGui.QIcon("Resources/icons/DynamicDataCreateConfiguration.svg"))
+            self.setWindowIcon(QtGui.QIcon(asIcon('DynamicDataCreateConfiguration')))
             self.dd = dd
             self.configuration = {}
             self.curLineEdit = None #used only in event filter and handleCtrlTab()
@@ -843,7 +845,7 @@ you can use Undo to revert all your changes to the selected object.
 
 
     def GetResources(self):
-        return {'Pixmap'  : os.path.join( iconPath , 'DynamicDataCreateConfiguration.svg'),
+        return {'Pixmap'  : asIcon('DynamicDataCreateConfiguration'),
                 'MenuText': "Create/Edit Con&figuration",
                 'Accel'   : "Ctrl+Shift+D,F",
                 'ToolTip' : "Create or edit an existing configuration in the selected object"}
@@ -977,7 +979,7 @@ class DynamicDataEditEnumerationCommandClass(DynamicDataBaseCommandClass):
 
 
     def GetResources(self):
-        return {'Pixmap'  : os.path.join( iconPath , 'DynamicDataEditEnumerations.svg'),
+        return {'Pixmap'  : asIcon('DynamicDataEditEnumerations'),
                 'MenuText': "&Edit Enumerations",
                 'Accel'   : "Ctrl+Shift+D,E",
                 'ToolTip' : "Edit properties of type Enumeration in selected object"}
@@ -1315,7 +1317,7 @@ class DynamicDataAddPropertyCommandClass(DynamicDataBaseCommandClass):
             mostRecentTypes.append(pg.GetString('mru'+str(ii),""))
 
     def GetResources(self):
-        return {'Pixmap'  : os.path.join( iconPath , 'AddProperty.svg'),
+        return {'Pixmap'  : asIcon('AddProperty'),
                 'MenuText': "&Add Property",
                 'Accel'   : "Ctrl+Shift+D,A",
                 'ToolTip' : "Add a custom property to the DynamicData object"}
@@ -1539,7 +1541,7 @@ class DynamicDataMoveToNewGroupCommandClass(DynamicDataBaseCommandClass):
     """Move properties to new group"""
 
     def GetResources(self):
-        return {'Pixmap'  : os.path.join(iconPath , 'MoveToGroup.svg'),
+        return {'Pixmap'  : asIcon('MoveToGroup'),
                 'MenuText': "Move to new &group",
                 'Accel'   : "Ctrl+Shift+D,G",
                 'ToolTip' : "Move dynamic properties to new group.\n\
@@ -1621,7 +1623,7 @@ class DynamicDataRenamePropertyCommandClass(DynamicDataBaseCommandClass):
         self.obj = None
 
     def GetResources(self):
-        return {'Pixmap'  : os.path.join(iconPath , 'RenameProperty.svg'),
+        return {'Pixmap'  : asIcon('RenameProperty'),
                 'MenuText': "Re&name Property",
                 'Accel'   : "Ctrl+Shift+D,N",
                 'ToolTip' : "Rename a dynamic property"}
@@ -1730,7 +1732,7 @@ class DynamicDataRetyePropertyCommandClass(DynamicDataBaseCommandClass):
         self.obj = None
 
     def GetResources(self):
-        return {'Pixmap'  : os.path.join(iconPath , 'RetypeProperty.svg'),
+        return {'Pixmap'  : asIcon('RetypeProperty'),
                 'MenuText': "Ret&ype Property",
                 'Accel'   : "Ctrl+Shift+D,Y",
                 'ToolTip' : "Retype a dynamic property"}
@@ -1821,7 +1823,7 @@ class DynamicDataSetTooltipCommandClass(DynamicDataBaseCommandClass):
         self.obj = None
 
     def GetResources(self):
-        return {'Pixmap'  : os.path.join(iconPath , 'SetTooltip.svg'),
+        return {'Pixmap'  : asIcon('SetTooltip'),
                 'MenuText': "Se&t Tooltip",
                 'Accel'   : "Ctrl+Shift+D,T",
                 'ToolTip' : "Set the tooltip of a dynamic property"}
@@ -1896,7 +1898,7 @@ class DynamicDataRemovePropertyCommandClass(DynamicDataBaseCommandClass):
         self.obj = None
 
     def GetResources(self):
-        return {'Pixmap'  : os.path.join( iconPath , 'RemoveProperty.svg'),
+        return {'Pixmap'  : asIcon('RemoveProperty'),
                 'MenuText': "&Remove Property",
                 'Accel'   : "Ctrl+Shift+D,R",
                 'ToolTip' : "Remove a custom property from the DynamicData object"}
@@ -1952,7 +1954,7 @@ class DynamicDataImportAliasesCommandClass(DynamicDataBaseCommandClass):
     """Import Aliases Command"""
 
     def GetResources(self):
-        return {'Pixmap'  : os.path.join( iconPath , 'ImportAliases.svg'),
+        return {'Pixmap'  : asIcon('ImportAliases'),
                 'MenuText': "&Import Aliases",
                 'ToolTip' : "Import aliases from selected spreadsheet(s) into selected dd object"}
 
@@ -2123,7 +2125,7 @@ class DynamicDataImportNamedConstraintsCommandClass(DynamicDataBaseCommandClass)
         self.sketches = []
 
     def GetResources(self):
-        return {'Pixmap'  : os.path.join( iconPath , 'ImportNamedConstraints.svg'),
+        return {'Pixmap'  : asIcon('ImportNamedConstraints'),
                 'MenuText': "&Import Named Constraints",
                 'ToolTip' : "Import named constraints from selected sketch(es) into selected dd object"}
 
@@ -2266,7 +2268,7 @@ class DynamicDataCopyPropertyCommandClass(DynamicDataBaseCommandClass):
             super(DynamicDataCopyPropertyCommandClass.CopyDlg, self).__init__(Gui.getMainWindow())
             self.setAttribute(QtCore.Qt.WA_WindowPropagation, True)
             self.setWindowTitle(f"DynamicData v{__version__} Copy / Set / Bind")
-            icon = QtGui.QIcon(os.path.join(iconPath, 'CopyProperty.svg'))
+            icon = QtGui.QIcon(asIcon('CopyProperty'))
             self.setWindowIcon(icon)
             self.applied = False #apply button clicked
             self.obj1 = obj1
@@ -2984,7 +2986,7 @@ which cannot be bound by expression.\n""")
         self.obj2 = None
 
     def GetResources(self):
-        return {'Pixmap'  : os.path.join( iconPath , 'CopyProperty.svg'),
+        return {'Pixmap'  : asIcon('CopyProperty'),
                 'MenuText': "C&opy Property",
                 'ToolTip' : "Copy/Set property values between selected objects"}
 
@@ -3032,7 +3034,7 @@ class DynamicDataCommands:
         return 0
 
     def GetResources(self):
-        return {'Pixmap'  : os.path.join( iconPath , 'CreateObject.svg'), 'MenuText': 'DynamicData Commands', 'ToolTip': 'DynamicData commands'}
+        return {'Pixmap'  : asIcon('CreateObject'), 'MenuText': 'DynamicData Commands', 'ToolTip': 'DynamicData commands'}
 
     def IsActive(self): # optional
         return True

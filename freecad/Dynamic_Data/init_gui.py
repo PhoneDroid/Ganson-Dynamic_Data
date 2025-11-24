@@ -26,12 +26,8 @@ import os
 import FreeCAD
 import FreeCADGui as Gui
 
-import freecad.Dynamic_Data.dynamicdatawb_locator as dynamicdatawb_locator
-dynamicdataWBPath = os.path.dirname(dynamicdatawb_locator.__file__)
-global dynamicdataWB_icons_path
-dynamicdataWB_icons_path = os.path.join(dynamicdataWBPath,'Resources','icons')
-global main_dynamicdataWB_Icon
-main_dynamicdataWB_Icon = os.path.join(dynamicdataWB_icons_path , 'DynamicDataLogo.svg')
+from .Misc import asIcon
+
 global contextMenuAdded
 contextMenuAdded = False
 global pg
@@ -51,15 +47,13 @@ pg = FreeCAD.ParamGet("User parameter:BaseApp/Preferences/Mod/DynamicData")
 # Initialize the workbench
 class DynamicDataWorkbench(Gui.Workbench):
 
-    global main_dynamicdataWB_Icon
     global hasRequests
 
     MenuText = "DynamicData"
     ToolTip = "DynamicData workbench"
-    Icon = main_dynamicdataWB_Icon #already defined in package.xml file
+    Icon = asIcon('DynamicDataLogo') #already defined in package.xml file
 
     def __init__(self):
-#        self.__class__.Icon = main_dynamicdataWB_Icon
         self.list = None
         pass
 
@@ -84,7 +78,7 @@ class DynamicDataWorkbench(Gui.Workbench):
 
         if pg.GetBool("AddToFreeCADPreferences",True):
             Gui.addPreferencePage(DynamicDataCmd.uiPath + "/dynamicdataprefs.ui", "DynamicData")
-            Gui.addIcon("preferences-dynamicdata",dynamicdataWB_icons_path + "/DynamicDataPreferencesLogo.svg")
+            Gui.addIcon("preferences-dynamicdata",asIcon('DynamicDataPreferencesLogo'))
 
     def Activated(self):
         """This function is executed when the workbench is activated."""
